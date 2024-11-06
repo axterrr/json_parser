@@ -1,0 +1,10 @@
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+json = _{ value }
+value = _{ object | array | string | number | boolean | null }
+object = { "{" ~ (field ~ ("," ~ field)*)? ~ "}" }
+field = { string ~ ":" ~ value }
+array = { "[" ~ (value ~ ("," ~ value)*)? ~ "]" }
+string = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
+number = @{ "-"? ~ ("0" | ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*) ~ ("." ~ ASCII_DIGIT+)? }
+boolean = { "true" | "false" }
+null = { "null" }
