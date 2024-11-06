@@ -6,6 +6,58 @@ mod json_parser_tests {
     use super::*;
 
     #[test]
+    fn test_parse_rule_json() -> anyhow::Result<()> {
+        let data_to_parse1 = "null";
+        let data_to_parse2 = "true";
+        let data_to_parse3 = "-23.5";
+        let data_to_parse4 = "\"string\"";
+        let data_to_parse5 = "[1,2,3]";
+        let data_to_parse6 = "{\"aaa\":123}";
+
+        let parsed_data1 = JsonGrammar::parse(Rule::json, data_to_parse1)?;
+        let parsed_data2 = JsonGrammar::parse(Rule::json, data_to_parse2)?;
+        let parsed_data3 = JsonGrammar::parse(Rule::json, data_to_parse3)?;
+        let parsed_data4 = JsonGrammar::parse(Rule::json, data_to_parse4)?;
+        let parsed_data5 = JsonGrammar::parse(Rule::json, data_to_parse5)?;
+        let parsed_data6 = JsonGrammar::parse(Rule::json, data_to_parse6)?;
+
+        assert_eq!(parsed_data1.as_str(), data_to_parse1);
+        assert_eq!(parsed_data2.as_str(), data_to_parse2);
+        assert_eq!(parsed_data3.as_str(), data_to_parse3);
+        assert_eq!(parsed_data4.as_str(), data_to_parse4);
+        assert_eq!(parsed_data5.as_str(), data_to_parse5);
+        assert_eq!(parsed_data6.as_str(), data_to_parse6);
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_parse_rule_value() -> anyhow::Result<()> {
+        let data_to_parse1 = "null";
+        let data_to_parse2 = "true";
+        let data_to_parse3 = "-23.5";
+        let data_to_parse4 = "\"string\"";
+        let data_to_parse5 = "[1,2,3]";
+        let data_to_parse6 = "{\"aaa\":123}";
+
+        let parsed_data1 = JsonGrammar::parse(Rule::value, data_to_parse1)?;
+        let parsed_data2 = JsonGrammar::parse(Rule::value, data_to_parse2)?;
+        let parsed_data3 = JsonGrammar::parse(Rule::value, data_to_parse3)?;
+        let parsed_data4 = JsonGrammar::parse(Rule::value, data_to_parse4)?;
+        let parsed_data5 = JsonGrammar::parse(Rule::value, data_to_parse5)?;
+        let parsed_data6 = JsonGrammar::parse(Rule::value, data_to_parse6)?;
+
+        assert_eq!(parsed_data1.as_str(), data_to_parse1);
+        assert_eq!(parsed_data2.as_str(), data_to_parse2);
+        assert_eq!(parsed_data3.as_str(), data_to_parse3);
+        assert_eq!(parsed_data4.as_str(), data_to_parse4);
+        assert_eq!(parsed_data5.as_str(), data_to_parse5);
+        assert_eq!(parsed_data6.as_str(), data_to_parse6);
+
+        Ok(())
+    }
+
+    #[test]
     fn test_parse_rule_null() -> anyhow::Result<()> {
         let data_to_parse = "null";
 
