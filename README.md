@@ -8,6 +8,7 @@ This project implements a simplified JSON parser in Rust using the Pest parsing 
 
 The JSON parser uses a custom Pest grammar defined in `json_grammar.pest`. This grammar outlines rules for recognizing each component of JSON syntax. Key rules include:
 
+- **json**: Represents a valid JSON document.
 - **value**: Represents any valid JSON value (objects, arrays, strings, numbers, booleans, and null).
 - **object**: Matches JSON objects, which are defined by key-value pairs inside curly braces `{}`.
 - **array**: Matches JSON arrays, which are defined by comma-separated values inside square brackets `[]`.
@@ -27,3 +28,79 @@ The parsing results are intended to be used for:
 - Validating JSON data before further processing or storage.
 - Extracting data from the JSON structure for use in Rust applications.
 - Converting JSON data into Rust objects or other data formats if additional layers are implemented.
+
+## Grammar rules
+
+This section describes the grammar rules used in the simplified JSON parser, designed to handle the basic structure of JSON values, including objects, arrays, strings, numbers, booleans, and null values.
+
+### json
+
+This rule is the entry point for parsing a JSON structure. It parses a value inside the start-of-input (SOI) and end-of-input (EOI) markers, ensuring that the entire content adheres to JSON rules.
+
+```
+json = { SOI ~ value ~ EOI }
+```
+
+### value
+
+The value rule defines the possible types that a JSON value can take, including objects, arrays, strings, numbers, booleans, and null.
+
+```
+value = _{ object | array | string | number | boolean | null }
+```
+
+### object
+
+An object in JSON is a collection of key-value pairs enclosed in curly braces {}. Each field consists of a string (the key) followed by a colon : and the corresponding value.
+
+```
+object = { "{" ~ (field ~ ("," ~ field)*)? ~ "}" }
+```
+
+### field
+
+A field consists of a string followed by a colon : and a value, representing a key-value pair in a JSON object.
+
+```
+field = { string ~ ":" ~ value }
+```
+
+### array
+
+An array in JSON is a collection of values enclosed in square brackets [], separated by commas.
+
+```
+array = { "[" ~ (value ~ ("," ~ value)*)? ~ "]" }
+```
+
+### string
+
+A string is a sequence of characters enclosed in double quotes " and can contain any characters except the closing quote. It is parsed as a sequence of any characters that are not a double quote.
+
+```
+string = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
+```
+
+### number
+
+A number can either be a positive or negative integer, with an optional decimal point and digits following it. The rule accounts for numbers like -12.34, 0, or 123.
+
+```
+number = @{ "-"? ~ ("0" | ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*) ~ ("." ~ ASCII_DIGIT+)? }
+```
+
+### boolean
+
+A boolean value can be either true or false.
+
+```
+boolean = { "true" | "false" }
+```
+
+### null
+
+The null rule matches the literal string "null", representing a null value in JSON.
+
+```
+null = { "null" }
+```
