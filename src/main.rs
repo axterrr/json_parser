@@ -29,8 +29,12 @@ fn main() {
     };
 }
 
-fn parse_json(file: &PathBuf) -> Result<String, JsonParserError> {
-    let unparsed_file = read_to_string(file)?;
-    let res = JsonGrammar::parse(Rule::json, &unparsed_file)?;
+fn parse_json(file: &PathBuf) -> Result<String, String> {
+    let unparsed_file = read_to_string(file)
+        .map_err(|_| format!("Failed to read file: {:?}", file))?;
+    
+    let res = JsonGrammar::parse(Rule::json, &unparsed_file)
+        .map_err(|e| format!("Syntax error while parsing JSON: \n{}", e))?;
+    
     Ok(format!("{}", res))
 }
