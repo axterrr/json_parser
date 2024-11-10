@@ -2,6 +2,7 @@
 name = "json_parser"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
 description = "A simplified JSON parser written in Rust using the Pest parsing library."
 authors = ["Hibskyi Vladyslav"]
 
