@@ -1,5 +1,5 @@
 [package]
-name = "json_parser"
+name = "json_parser_hibskyi"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"

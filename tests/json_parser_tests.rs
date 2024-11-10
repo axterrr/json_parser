@@ -1,4 +1,4 @@
-use json_parser::*;
+use json_parser_hibskyi::*;
 use pest::Parser;
 
 #[cfg(test)]

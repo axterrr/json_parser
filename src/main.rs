@@ -1,6 +1,6 @@
 mod cli;
 use cli::{Action::*, CommandLineArgs};
-use json_parser::*;
+use json_parser_hibskyi::*;
 use pest::Parser;
 use std::{fs::read_to_string, path::PathBuf};
 use structopt::StructOpt;
