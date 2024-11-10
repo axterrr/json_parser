@@ -1,5 +1,7 @@
 # JSON Parser
 
+Link: https://crates.io/crates/json_parser_hibskyi Docs: https://docs.rs/json_parser_hibskyi/latest/json_parser_hibskyi/
+
 ## Project Overview
 
 This project implements a simplified JSON parser in Rust using the Pest parsing library. The parser can recognize and validate basic JSON structures, including objects, arrays, strings, numbers, booleans, and null values. The goal is to provide a foundation for parsing JSON-like data formats with essential functionality, without handling complex edge cases, such as nested escape characters in strings.
