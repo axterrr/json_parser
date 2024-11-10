@@ -3,8 +3,10 @@ name = "json_parser"
 version = "0.1.0"
 edition = "2021"
 description = "A simplified JSON parser written in Rust using the Pest parsing library."
+authors = ["Hibskyi Vladyslav"]
 
 [dependencies]
 anyhow = "1.0.93"
 pest = "2.7.14"
 pest_derive = "2.7.14"
+structopt = "0.3.26"

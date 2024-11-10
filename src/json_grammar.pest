@@ -1,5 +1,5 @@
 WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
-json = _{ value }
+json = { SOI ~ value ~ EOI }
 value = _{ object | array | string | number | boolean | null }
 object = { "{" ~ (field ~ ("," ~ field)*)? ~ "}" }
 field = { string ~ ":" ~ value }
