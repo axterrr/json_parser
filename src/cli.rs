@@ -3,9 +3,9 @@ use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
 pub enum Action {
-    Parse { 
+    Parse {
         #[structopt(parse(from_os_str), short, long)]
-        file: PathBuf 
+        file: PathBuf,
     },
     Help,
     Credits,

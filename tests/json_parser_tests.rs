@@ -117,8 +117,7 @@ mod json_parser_tests {
     fn test_parse_rule_array() -> anyhow::Result<()> {
         let data_to_parse1 = "[]";
         let data_to_parse2 = "[45]";
-        let data_to_parse3 = 
-            "[
+        let data_to_parse3 = "[
                 \"bla-bla\",
                 345.65,
                 null,
@@ -130,7 +129,7 @@ mod json_parser_tests {
         let parsed_data1 = JsonGrammar::parse(Rule::array, data_to_parse1)?;
         let parsed_data2 = JsonGrammar::parse(Rule::array, data_to_parse2)?;
         let parsed_data3 = JsonGrammar::parse(Rule::array, data_to_parse3)?;
-        
+
         assert_eq!(parsed_data1.as_str(), data_to_parse1);
         assert_eq!(parsed_data2.as_str(), data_to_parse2);
         assert_eq!(parsed_data3.as_str(), data_to_parse3);
@@ -159,8 +158,7 @@ mod json_parser_tests {
     fn test_parse_rule_object() -> anyhow::Result<()> {
         let data_to_parse1 = "{}";
         let data_to_parse2 = "{\"key\"  :  \"value\"}";
-        let data_to_parse3 = 
-            "{
+        let data_to_parse3 = "{
                 \"name\": \"Artur\", 
                 \"age\": -0.67, 
                 \"occupation\": \"med_worker\", 
