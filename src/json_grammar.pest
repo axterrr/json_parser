@@ -1,10 +1,42 @@
+/// Represents any whitespace character: spaces, tabs, carriage returns, and newlines.
 WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+
+/// The starting rule for a JSON document. A valid JSON document starts with `SOI` (start-of-input),
+/// followed by a valid `value`, and ends with `EOI` (end-of-input).
 json = { SOI ~ value ~ EOI }
+
+/// Represents any valid JSON value, which can be:
+/// - an object,
+/// - an array,
+/// - a string,
+/// - a number,
+/// - a boolean,
+/// - or null.
 value = _{ object | array | string | number | boolean | null }
+
+/// Matches a JSON object, which is enclosed in curly braces `{}` and consists of key-value pairs.
+/// Each key-value pair is separated by a comma.
 object = { "{" ~ (field ~ ("," ~ field)*)? ~ "}" }
+
+/// Represents a key-value pair in a JSON object. A `field` consists of a `string` (the key),
+/// followed by a colon `:`, and a valid `value` (the value associated with the key).
 field = { string ~ ":" ~ value }
+
+/// Matches a JSON array, which is enclosed in square brackets `[]` and can contain multiple values.
+/// The values inside an array are separated by commas.
 array = { "[" ~ (value ~ ("," ~ value)*)? ~ "]" }
+
+/// Matches a JSON string, which is enclosed in double quotes `"`. It can contain any characters
+/// except an unescaped double quote. The string is matched using the `ANY` rule, ensuring flexibility
+/// in the content, while preventing unescaped double quotes.
 string = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
+
+/// Matches a JSON number. It can either be an integer (optionally prefixed with a minus sign `-`) or
+/// a floating-point number (with a decimal point and digits following it).
 number = @{ "-"? ~ ("0" | ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*) ~ ("." ~ ASCII_DIGIT+)? }
+
+/// Matches a JSON boolean value. It can either be `true` or `false`.
 boolean = { "true" | "false" }
+
+/// Matches the JSON literal `null`, representing the absence of any value.
 null = { "null" }
