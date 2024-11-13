@@ -1,4 +1,4 @@
-# JSON Parser
+# json_parser_hibskyi
 
 Link: https://crates.io/crates/json_parser_hibskyi Docs: https://docs.rs/json_parser_hibskyi/latest/json_parser_hibskyi/
 
