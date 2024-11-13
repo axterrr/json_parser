@@ -6,6 +6,20 @@ mod json_parser_tests {
     use super::*;
 
     #[test]
+    fn test_parse_rule_whitespace() -> anyhow::Result<()> {
+        let data_to_parse1 = "     ";
+        let data_to_parse2 = "\t\n\r";
+
+        let parsed_data1 = JsonGrammar::parse(Rule::WHITESPACE, data_to_parse1)?;
+        let parsed_data2 = JsonGrammar::parse(Rule::WHITESPACE, data_to_parse2)?;
+
+        assert_eq!(parsed_data1.as_str(), "");
+        assert_eq!(parsed_data2.as_str(), "");
+
+        Ok(())
+    }
+
+    #[test]
     fn test_parse_rule_json() -> anyhow::Result<()> {
         let data_to_parse1 = "null";
         let data_to_parse2 = "true";
